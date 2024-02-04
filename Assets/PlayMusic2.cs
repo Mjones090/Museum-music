@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayMusic2 : MonoBehaviour
 {
     private AudioSource audioSource;
+    private bool isPaused = false; // Flag to track pause state
 
 
     // Start is called before the first frame update
@@ -21,16 +22,18 @@ public class PlayMusic2 : MonoBehaviour
         //Press the 'p' key to paly or pause the audio
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (!audioSource.isPlaying)
+            if (isPaused)
             {
-                //Pause the audio if it's currently playing
-                audioSource.Pause();
+                //If currently paused, resume playing
+                audioSource.UnPause();
+                isPaused = false;   
             }
 
             else
             {
-                //Start playing the audio if it's paused or hasn't started yet
-                audioSource.Play();
+                //If currently playing, pause
+                audioSource.Pause();
+                isPaused = true;   
             }
         }
     }
